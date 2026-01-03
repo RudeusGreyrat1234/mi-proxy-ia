@@ -5,7 +5,6 @@ export default async function handler(req, res) {
 
     if (req.method === 'POST') {
         try {
-            // Leemos los datos que envía Roblox
             const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
             const { mensaje, key } = body;
 
