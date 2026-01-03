@@ -1,10 +1,12 @@
 export default async function handler(req, res) {
+    // Configuración de permisos para que Roblox pueda entrar
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     if (req.method === 'POST') {
         try {
+            // Esto asegura que el mensaje se lea bien sin importar el formato
             const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
             const { mensaje, key } = body;
 
@@ -19,7 +21,7 @@ export default async function handler(req, res) {
             const data = await response.json();
             return res.status(200).json(data);
         } catch (error) {
-            return res.status(500).json({ error: error.message });
+            return res.status(500).json({ error: "Error en el servidor: " + error.message });
         }
     } else {
         return res.status(405).json({ error: 'Método no permitido' });
